@@ -19,12 +19,12 @@ item_main = item.find(class_="structItem-cell--main")
 
 title = item_main.find(class_="structItem-title").a
 
-link = ""
+link = item_main.find(["li"], class_="structItem-startDate").a["href"]
+
+print(link)
 
 with open("tests.txt", "w") as file:
-    file.write(title.string)
-    # for i in plg.contents:
-    #     file.write(f"{i}\n\n")
-    # file.write(doc.contents)
+    file.write(f"Title: {title.string}\n")
+    file.write(f"Link: {link}\n\n")
 
 print()

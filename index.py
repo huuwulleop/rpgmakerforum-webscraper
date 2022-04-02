@@ -29,7 +29,7 @@ print()
 
 prev_i = 1
 
-with open("plugins_list.txt", "w") as file:
+with open("plugins_list2.txt", "w") as file:
     for i in range(1, 3):
         prev_i = i
         result = ""
@@ -50,9 +50,10 @@ with open("plugins_list.txt", "w") as file:
         for plugin in plugins:
             main_div = plugin.find(class_="structItem-cell--main")
             title = main_div.find(class_="structItem-title").a
+            author = main_div.find(class_="username").string
             link = main_div.find(["li"], class_="structItem-startDate").a["href"]
             
-            file.write(f"Title: {title.string}\n")
-            file.write(f"Link: {dns}{link}\n\n")
+            file.write(f"[{author}]\n\t{title.string}\n")
+            file.write(f"\t{dns}{link}\n\n")
         
         # file.write(f"{plugin.prettify()}\n")

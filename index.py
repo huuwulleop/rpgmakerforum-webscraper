@@ -8,8 +8,23 @@ result = requests.get(url)
 
 doc = BeautifulSoup(result.text, "html.parser")
 
-doc = doc.find(class_="structItemContainer-group js-threadList")
+# plugins list on one page
+plg = doc.find(class_="structItemContainer-group js-threadList")
 
-divs = doc.contents
+# a plugin
+item = plg.find("div")
 
-print(divs[0])
+# main div of that plugin
+item_main = item.find(class_="structItem-cell--main")
+
+title = item_main.find(class_="structItem-title").a
+
+link = ""
+
+with open("tests.txt", "w") as file:
+    file.write(title.string)
+    # for i in plg.contents:
+    #     file.write(f"{i}\n\n")
+    # file.write(doc.contents)
+
+print()

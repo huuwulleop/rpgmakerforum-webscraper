@@ -6,15 +6,12 @@ dns = "https://forums.rpgmakerweb.com"
 url = "https://forums.rpgmakerweb.com/index.php?forums/rgss3-scripts-rmvx-ace.35/"
 
 result = requests.get(url)
-
 doc = BeautifulSoup(result.text, "html.parser")
 
 # plugins list on one page
 plg = doc.find(class_="structItemContainer-group js-threadList")
-
 # a plugin
 item = plg.find("div")
-
 # main div of that plugin
 item_main = item.find(class_="structItem-cell--main")
 title = item_main.find(class_="structItem-title").a
@@ -27,11 +24,11 @@ link = item_main.find(["li"], class_="structItem-startDate").a["href"]
 print()
 
 
-prev_i = 1
+# prev_i = 1
 
-with open("plugins_list2.txt", "w") as file:
-    for i in range(1, 3):
-        prev_i = i
+with open("plugins_list.txt", "w") as file:
+    for i in range(1, 4):
+        # prev_i = i
         result = ""
         
         file.write("\n\n")

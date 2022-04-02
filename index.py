@@ -20,25 +20,39 @@ item_main = item.find(class_="structItem-cell--main")
 title = item_main.find(class_="structItem-title").a
 link = item_main.find(["li"], class_="structItem-startDate").a["href"]
 
-print(link)
-
-with open("tests.txt", "w") as file:
-    file.write(f"Title: {title.string}\n")
-    file.write(f"Link: {link}\n\n")
+# with open("tests.txt", "w") as file:
+#     file.write(f"Title: {title.string}\n")
+#     file.write(f"Link: {link}\n\n")
 
 print()
 
-plugin_page = doc.find(class_="structItemContainer-group js-threadList")
 
-plugins = plugin_page.find_all(["div"], class_=re.compile("structItem structItem--thread js-inlineModContainer js-threadListItem.*"))
+prev_i = 1
 
-with open("tests2.txt", "w") as file:
-    for plugin in plugins:
-        main_div = plugin.find(class_="structItem-cell--main")
-        title = main_div.find(class_="structItem-title").a
-        aaa = main_div.find(["li"], class_="structItem-startDate").a["href"]
+with open("plugins_list.txt", "w") as file:
+    for i in range(1, 3):
+        prev_i = i
+        result = ""
         
-        file.write(f"Title: {title.string}\n")
-        file.write(f"Link: {dns}{aaa}\n\n")
+        file.write("\n\n")
+        
+        if i == 1:
+            result = requests.get(url)
+        else:
+            result = requests.get(f"{url}page-{i}")
+        
+        doc = BeautifulSoup(result.text, "html.parser")
+        plugin_page = doc.find(class_="structItemContainer-group js-threadList")
+        plugins = plugin_page.find_all(["div"], class_=re.compile("structItem structItem--thread js-inlineModContainer js-threadListItem.*"))        
+        
+        file.write(f"=== Page {i} ===\n\n")
+    
+        for plugin in plugins:
+            main_div = plugin.find(class_="structItem-cell--main")
+            title = main_div.find(class_="structItem-title").a
+            link = main_div.find(["li"], class_="structItem-startDate").a["href"]
+            
+            file.write(f"Title: {title.string}\n")
+            file.write(f"Link: {dns}{link}\n\n")
         
         # file.write(f"{plugin.prettify()}\n")

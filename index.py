@@ -50,7 +50,8 @@ with open("plugins_list.txt", "w") as file:
             author = main_div.find(class_="username").string
             link = main_div.find(["li"], class_="structItem-startDate").a["href"]
             
-            file.write(f"[{author}]\n\t{title.string}\n")
+            file.write(f"[{author}]\n")
+            file.write(f"\t{title.string}\n")
             file.write(f"\t{dns}{link}\n\n")
         
         # file.write(f"{plugin.prettify()}\n")

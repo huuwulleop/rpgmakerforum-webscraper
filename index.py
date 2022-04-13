@@ -46,6 +46,7 @@ with open("plugins_list.txt", "w") as file:
     
         for plugin in plugins:
             main_div = plugin.find(class_="structItem-cell--main")
+            
             title = main_div.find(class_="structItem-title").a
             author = main_div.find(class_="username").string
             link = main_div.find(["li"], class_="structItem-startDate").a["href"]

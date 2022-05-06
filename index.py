@@ -1,13 +1,17 @@
 from bs4 import BeautifulSoup
 import requests
 import re
+import json
 
 dns = "https://forums.rpgmakerweb.com"
+
+# For RPG Maker VX Ace plugins
 url = "https://forums.rpgmakerweb.com/index.php?forums/rgss3-scripts-rmvx-ace.35/"
 
+# OLD: Testing
+# +++++++++++++++++++++++++++++++++++++++++++++++++++
 result = requests.get(url)
 doc = BeautifulSoup(result.text, "html.parser")
-
 # plugins list on one page
 plg = doc.find(class_="structItemContainer-group js-threadList")
 # a plugin
@@ -20,15 +24,11 @@ link = item_main.find(["li"], class_="structItem-startDate").a["href"]
 # with open("tests.txt", "w") as file:
 #     file.write(f"Title: {title.string}\n")
 #     file.write(f"Link: {link}\n\n")
+# +++++++++++++++++++++++++++++++++++++++++++++++++++
 
-print()
-
-
-# prev_i = 1
 
 with open("plugins_list.txt", "w") as file:
     for i in range(1, 4):
-        # prev_i = i
         result = ""
         
         file.write("\n\n")
@@ -54,5 +54,3 @@ with open("plugins_list.txt", "w") as file:
             file.write(f"[{author}]\n")
             file.write(f"\t{title.string}\n")
             file.write(f"\t{dns}{link}\n\n")
-        
-        # file.write(f"{plugin.prettify()}\n")

@@ -27,6 +27,7 @@ link = item_main.find(["li"], class_="structItem-startDate").a["href"]
 # +++++++++++++++++++++++++++++++++++++++++++++++++++
 
 plugin_list = []
+id = 0
 
 with open("plugins.json", "w") as file:
     for i in range(1, 2):
@@ -58,7 +59,9 @@ with open("plugins.json", "w") as file:
                 "title": title.string,
                 "author": author,
                 "link": dns + link,
+                "id": id,
             }
+            id += 1
                         
             plugin_list.append(plugin_data)
             
